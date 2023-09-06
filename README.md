@@ -1,4 +1,4 @@
-The official site for [Sacred Haven](https//sacredhavenm59.com) is at https://sacredhavenm59.com
+The official site for Sacred Haven is at https://sacredhavenm59.org
 
 Meridian 59 v1.1, January, 2015
 Andrew Kirmse and Chris Kirmse
