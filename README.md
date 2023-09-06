@@ -1,0 +1,98 @@
+The official site for [Sacred Haven](https//sacredhavenm59.com) is at https://sacredhavenm59.com
+
+Meridian 59 v1.1, January, 2015
+Andrew Kirmse and Chris Kirmse
+
+Copyright 1994-2022 Andrew Kirmse and Chris Kirmse
+All rights reserved.  Meridian is a registered trademark.
+
+
+LICENSE
+
+This project is distributed under a license that is described in the
+LICENSE file.  The license does not cover the game content (artwork,
+rooms, audio, etc.), which are not included.
+
+Note that "Meridian" is a registered trademark and you may not use it
+without our written permission.
+
+The license requires that if you redistribute this code in any form,
+you must make the source code available, including any changes you
+make.  We would love it if you would contribute your changes back to
+the original source so that everyone can benefit.
+
+
+WHAT'S INCLUDED AND NOT INCLUDED
+
+The source to the client, server, game code, Blakod compiler, room
+editor, and all associated tools are included.  The source code to the
+Miles Sound System audio library is not included.  Client builds that you
+make will use the fallback waveplay audio library instead.
+
+
+BUILD INSTRUCTIONS
+
+The code has been built successfully with Microsoft Visual Studio 2022
+Community Edition, which you can download for free at
+http://www.visualstudio.com/en-us/downloads/download-visual-studio-vs.aspx
+
+1. Make sure Visual Studio's binaries are in your path, e.g. by using
+   the vcvars32.bat script that comes with Visual Studio.
+
+2. Go to the top-level directory (the one that contains this README).
+
+3. Type "nmake" to build debug versions, or "nmake RELEASE=1" to build
+   release versions.
+
+RUN INSTRUCTIONS
+
+After building the code, a server install is available in the
+run\server directory.  Type "blakserv.exe" in that directory to run
+the server.
+
+A client install is available in the run\localclient directory.  You
+will need to retrieve the artwork, rooms, and audio files from
+elsewhere and copy them into the resource subdirectory.
+
+The first thing you'll probably want to do is create an admin account
+on the server so that you can log in.  Go to the "Administration" tab
+on the server's interface and enter the command:
+
+create account admin joe.smith password
+
+(Don't use this default account name or password, or people will
+likely take over your server. You'll get back a message like "Created
+ACCOUNT 4".)
+
+Then create a character slot on that account with
+
+create admin 4
+
+You'll now be able to log in with this account name and password.  Be
+sure to "save game" from the server interface to save this new
+account.
+
+You can point your local client at your local server by running the
+client (meridian.exe) with command line flags, like this:
+
+meridian.exe /U:joe.smith /W:password /H:localhost /P:5959
+
+
+RUNNING ON LINUX
+
+The server can be built on Linux with the following commands:
+
+cd blakserv
+make -f makefile.linux
+
+The blakserv.cfg file requires some manual changes to run on Linux.
+
+
+THIRD-PARTY CODE
+
+Meridian uses zlib, libpng libarchive.  All three are built from source.
+libarchive was configured via cmake with the following cmake environment
+variables set to use zlib:
+
+ZLIB_INCLUDE_DIR points to the include directory
+ZLIB_LIBRARY points to lib/zlib.lib
