@@ -4,8 +4,11 @@ TOPDIR=..\..
 !include $(TOPDIR)\common.mak
 
 SOURCEDIR = $(TOPDIR)\resource\graphics
+OUTDIR = $(TOPDIR)\resource\graphics
 
 .SUFFIXES: .bbg .bmp
+
+DIRS = diggie
 
 BGFS = \
 	$(OUTDIR)\arrowfir.bgf \
@@ -17,13 +20,20 @@ BGFS = \
 	$(OUTDIR)\povmystsw.bgf \
 	$(OUTDIR)\splash.bgf \
 
-all: makedirs $(BGFS)
+all:
+	@-for %i in ($(DIRS)) do \
+		@if EXIST %i ( cd %i & \
+	 	$(MAKE) /$(MAKEFLAGS) $(COMMAND) &\
+		cd .. )
+
+clean:
+	@-for %i in ($(DIRS)) do \
+		@echo Making clean in %i & \
+		@if EXIST %i ( cd %i & \
+	 	$(MAKE) /$(MAKEFLAGS) clean &\
+		cd .. )
 
 {$(SOURCEDIR)}.bbg.bgf:
 	$(MAKEBGF) -o $@ @$<
-
-# How to make a BGF from a single bitmap file
-{$(SOURCEDIR)}.bmp.bgf:
-	$(MAKEBGF) -o $@ 1 $< 1 1 1
 
 !include $(TOPDIR)\rules.mak
